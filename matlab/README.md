@@ -1,6 +1,6 @@
 # test case: MATLAB
 
-This test runs the `ft_freqanalysis` function of [fieldtrip](https://fieldtriptoolbox.org). 
+This test runs the `ft_freqanalysis` function of [fieldtrip](http://www.fieldtriptoolbox.org). 
 
 ## lauch the test
 
