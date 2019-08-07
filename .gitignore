@@ -1,5 +1,7 @@
 *.dat
 *.eps
 *.pdf
-*/bench_*.o.*
-*/bench_*.e.*
+**/bench_*.o*
+**/bench_*.e*
+**/.start
+**/*.npy

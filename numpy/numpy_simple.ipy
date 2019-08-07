@@ -1,0 +1,76 @@
+#!/usr/bin/env ipython3
+# -*- coding: utf-8 -*-
+
+from __future__ import (
+    division, absolute_import, print_function, unicode_literals, )
+
+import os
+import time
+
+# ======================================================================
+def bm_numpy_blas(scalar, vect, matr):
+    scalar * matr
+    scalar * vect
+    vect * matr
+    matr * matr
+    np.dot(vect[:, None], vect[None, :])
+    np.dot(vect[None, :], vect[:, None])
+    np.dot(matr, vect)
+    np.dot(matr, matr)
+
+# ======================================================================
+def bm_numpy_fft(scalar, vect, matr):
+    np.fft.fft(vect)
+    np.fft.fftn(matr)
+
+# ======================================================================
+def bm_numpy_svd(scalar, vect, matr):
+    np.linalg.svd(vect[:, None])
+    np.linalg.svd(matr)
+
+# ======================================================================
+def bm_wait():
+    # write a empty to indiciate the job is ready for computation
+    f = open(os.environ['PBS_JOBNAME'],'w')
+    f.close()
+
+    print("ready")
+
+    s = 0 
+    while s != 2:
+        f = open('.start','r')
+        s = int(f.read(1))
+        f.close()
+
+# ======================================================================
+import numpy as np
+
+sizes=(100, 1000)
+benchmarks=('BLAS', 'FFT', 'SVD')
+
+scalar = 100
+
+# reading constant vector and matrix
+data = {}
+f = open('vector_matrix.npy','rb')
+for size in sizes:
+    v = np.load(f)
+    m = np.load(f)
+    data[size] = [v,m]
+f.close()
+
+# wait for start signal passed via .start file
+bm_wait()
+
+# got the start signal
+print("go at {}".format(time.time()))
+
+for size in sizes:
+    the_vector = data[size][0]
+    the_matrix = data[size][1]
+    for benchmark in benchmarks:
+        the_benchmark = locals()['bm_numpy_' + benchmark.lower()]
+        print('Benchmark NumPy {benchmark} (input size: {size})'
+            .format(**locals()))
+        result = %timeit -o the_benchmark(scalar, the_vector, the_matrix)
+        print()
