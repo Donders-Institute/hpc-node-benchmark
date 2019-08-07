@@ -4,7 +4,7 @@ This test runs the `ft_freqanalysis` function of [fieldtrip](http://www.fieldtri
 
 ## lauch the test
 
-The `run.sh` script is prepared for lauching the test.  The script takes two arguments: 1) the hostname of the node on which the computation jobs are executed, 2) the amount of concurrent jobs.
+The [`run.sh`](run.sh) script is prepared for lauching the test.  The script takes two arguments: 1) the hostname of the node on which the computation jobs are executed, 2) the amount of concurrent jobs.
 
 For example, to launch the test on node `dccn-c055.dccn.nl` with `4` concurrent jobs:
 
@@ -41,9 +41,9 @@ Follow the following steps to collect results and produce plots:
    `-- c055-8
    ```
 
-   The next step is to check the script `gen_plot_data.sh` and modify it accordingly to create data set for plot.  This script loops over the stdout files in the directory to get the elapsed time of the computation, calculates the statistical mean and standard deviation, and finally creates a tabular format that is ready to plot. The tabular data is stored in a file `plot.dat`.
+   The next step is to check the script [`gen_plot_data.sh`](gen_plot_data.sh) and modify it accordingly to create data set for plot.  This script loops over the stdout files in the directory to get the elapsed time of the computation, calculates the statistical mean and standard deviation, and finally creates a tabular format that is ready to plot. The tabular data is stored in a file `plot.dat`.
 
-3. Plot the data with the R script `plot.R`. It assumes that the `plot.dat` file is available right in the current directory.  It requires R and the ggplot module, which is available on the cluster. To generate the plot, use the following command:
+3. Plot the data with the R script [`plot.R`](plot.R). It assumes that the `plot.dat` file is available right in the current directory.  It requires R and the ggplot module, which is available on the cluster. To generate the plot, use the following command:
 
    ```bash
    $ module load R
