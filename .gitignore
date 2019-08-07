@@ -1,3 +1,5 @@
 *.dat
 *.eps
 *.pdf
+bench_*.o.*
+bench_*.e.*
