@@ -1,4 +1,4 @@
-# test case: MATLAB
+# Test case: MATLAB
 
 This test runs the `ft_freqanalysis` function of [fieldtrip](http://www.fieldtriptoolbox.org). 
 
